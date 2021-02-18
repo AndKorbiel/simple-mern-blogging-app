@@ -2,7 +2,7 @@ import { Component } from 'react';
 import BlogPost from './components/Blog-post';
 import TopBar from './components/Top-bar';
 import { connect } from 'react-redux';
-import { getAllBlogPostsEffect, getSelectedBlogPostsEffect, addNewPostEffect, removePostEffect, eidtPostEffect } from './state/effects';
+import {updateWithDataFromDbRequest, updateWithSelectedDataFromDbRequest, addNewPostRequest, removeDataFromStoreRequest, updateEditedPostInStoreRequest} from './state/actions'
 
 // Bootstrap
 import Container from 'react-bootstrap/Container';
@@ -179,11 +179,11 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    sendNewPostToStore: newPost => dispatch(addNewPostEffect(newPost)),
-    getAllBlogPostsFromStore: () => dispatch(getAllBlogPostsEffect()),
-    getSelectedBlogPostsFromStore: keyword => dispatch(getSelectedBlogPostsEffect(keyword)),
-    removePostFromStore: postId => dispatch(removePostEffect(postId)),
-    sendEditedPostToStore: editedPost => dispatch(eidtPostEffect(editedPost))
+    sendNewPostToStore: newPost => dispatch(addNewPostRequest(newPost)),
+    getAllBlogPostsFromStore: () => dispatch(updateWithDataFromDbRequest()),
+    getSelectedBlogPostsFromStore: keyword => dispatch(updateWithSelectedDataFromDbRequest(keyword)),
+    removePostFromStore: postId => dispatch(removeDataFromStoreRequest(postId)),
+    sendEditedPostToStore: editedPost => dispatch(updateEditedPostInStoreRequest(editedPost))
   }
 }
 
